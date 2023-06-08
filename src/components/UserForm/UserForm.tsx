@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
-import {IDishMutation, IUser} from "../../types";
+import {IUser, IUserMutation} from "../../types";
 import {nanoid} from "nanoid";
 
 
 interface IProps {
     onSubmit: (newUser: IUser) => void;
-}
+};
 
 enum ERole {
     User = 'user',
     Admin = 'Admin',
     Editor = 'editor'
-}
+};
 
 const UserForm: React.FC<IProps> = ({onSubmit}) => {
 
-    const [user, setUser] = useState<IDishMutation>({
+    const [user, setUser] = useState<IUserMutation>({
         name: '',
         email: '',
         role: '',
         isActive: false
-    })
+    });
 
 
     const onTextFiledChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLSelectElement>) => {
@@ -30,11 +30,10 @@ const UserForm: React.FC<IProps> = ({onSubmit}) => {
             ...prevState,
             [name]: value,
         }));
+
     };
 
-
     const getSelectOptions = () => {
-
         return Object.keys(ERole).map((key) => (
             <option
                 key={key}
@@ -43,7 +42,7 @@ const UserForm: React.FC<IProps> = ({onSubmit}) => {
                 {key}
             </option>
         ))
-    }
+    };
 
     const onFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -52,13 +51,13 @@ const UserForm: React.FC<IProps> = ({onSubmit}) => {
             id: nanoid(),
             ...user,
         })
-
-    }
+        setUser({name: '', email: '', isActive: false, role: ''});
+    };
 
     return (
         <form onSubmit={onFormSubmit}>
-            <h4>Add new dish</h4>
-            <div className="form-group">
+            <h2 className="text-center">Add new User</h2>
+            <div className="form-group mb-3">
                 <label htmlFor="name">Name</label>
                 <input
                     required
@@ -71,7 +70,7 @@ const UserForm: React.FC<IProps> = ({onSubmit}) => {
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group mb-3">
                 <label htmlFor="description">Email</label>
                 <input
                     required
@@ -98,14 +97,15 @@ const UserForm: React.FC<IProps> = ({onSubmit}) => {
             </div>
 
             <div className="form-group mb-3">
-                <label htmlFor="isActive">Name</label>
                 <input
+                    className="me-2 h-25"
                     type="checkbox"
                     name="isComplete"
                     id="name"
                     checked={user.isActive}
                     onChange={(e) => setUser(prevState => ({...prevState, isActive: e.target.checked}))}
                 />
+                <label htmlFor="isActive">User Active</label>
             </div>
 
             <button type="submit" className="btn btn-primary">Create</button>

@@ -4,12 +4,12 @@ export interface IUser {
     email:string;
     isActive:boolean;
     role:string;
-}
+};
 
 
-export interface IDishMutation {
+export interface IUserMutation {
     name:string;
     email:string;
     isActive:boolean;
     role:string;
-}
+};

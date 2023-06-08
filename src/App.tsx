@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import './App.css';
 import UserForm from "./components/UserForm/UserForm";
 import Users from "./components/Users/Users";
 import {IUser} from "./types";
 
 function App() {
-
     const [users, setUsers] = useState<IUser[]>([
         {id: '1', name: 'Bob', email: 'bob@bob.ob', role:'user', isActive:true},
         {id: '2', name: 'Tina', email: 'Tina@mail.ge', role:'editor', isActive:true},
@@ -14,22 +12,21 @@ function App() {
     ]);
 
     const addUser = (newUser:IUser) => {
-        setUsers(prevState => [...prevState, newUser])
-    }
-
+        setUsers(prevState => [...prevState, newUser]);
+    };
 
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col  border border-dark">
+                <div className="col border border-dark p-3">
                     <UserForm onSubmit={addUser}/>
                 </div>
-                <div className="col border border-dark">
+                <div className="col border border-dark p-3 overflow-auto">
                     <Users users={users}/>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default App;

@@ -11,13 +11,18 @@ function App() {
         {id: '2', name: 'Tina', email: 'Tina@mail.ge', role:'editor', isActive:true},
         {id: '3', name: 'Yakov', email: 'kovalski@okt.ava', role:'admin', isActive:true},
         {id: '4', name: 'Serik', email: 'sberik@lot.kz', role:'admin', isActive:false},
-
     ]);
+
+    const addUser = (newUser:IUser) => {
+        setUsers(prevState => [...prevState, newUser])
+    }
+
+
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="col  border border-dark">
-                    <UserForm/>
+                    <UserForm onSubmit={addUser}/>
                 </div>
                 <div className="col border border-dark">
                     <Users users={users}/>
